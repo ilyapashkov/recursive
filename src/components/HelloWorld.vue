@@ -11,17 +11,14 @@ export default {
     msg: String
   },
   mounted() {
-    this.recursive(this.$slots);
+    this.recursive(this.$children);
   },
   methods: {
-    recursive(context) {
-      const parentSlots = Object.values(context);
-      if (parentSlots.length) {
-        parentSlots.forEach(slots => {
-          slots.forEach(item => {
-            item.componentInstance['color'] = 'red';
-            this.recursive(item.componentInstance.$slots);
-          });
+    recursive(childrens) {
+      if (childrens.length) {
+        childrens.forEach(child => {
+          child['color'] = 'red';
+          this.recursive(child.$children);
         });
       }
     }
