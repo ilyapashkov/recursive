@@ -1,6 +1,7 @@
 <template>
   <div>
 		<h1 :style="{color: color}">I'm slot component</h1>
+		<button type="button" @click="changeColor()">Change Color</button>
 		<slot></slot>
   </div>
 </template>
@@ -12,6 +13,12 @@ export default {
     return {
       color: this.color
     };
+  },
+
+  methods: {
+    changeColor() {
+      this.$emit('changeProperty', {prop: 'color', value: 'blue'});
+    }
   }
 };
 </script>

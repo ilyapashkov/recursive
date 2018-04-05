@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <HelloWorld msg="Welcome to Your Vue.js App">
-			<SlotComponent>
-				<SlotComponent>
-					<SlotComponent/>
+			<SlotComponent @changeProperty="changeCustomProperty($event)">
+				<SlotComponent @changeProperty="changeCustomProperty($event)">
+					<SlotComponent @changeProperty="changeCustomProperty($event)" />
 				</SlotComponent>
 			</SlotComponent>
 		</HelloWorld>
@@ -19,6 +19,21 @@ export default {
   components: {
     HelloWorld,
     SlotComponent
+  },
+  methods: {
+    changeCustomProperty(payload) {
+      this[payload.prop] = payload.value;
+      this.updateTree(this.$children, payload);
+    },
+
+    updateTree(childrens, payload) {
+      if (childrens.length) {
+        childrens.forEach(child => {
+          child[payload.prop] = payload.value;
+          this.updateTree(child.$children, payload);
+        });
+      }
+    }
   }
 };
 </script>
