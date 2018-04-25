@@ -1,12 +1,13 @@
 <template>
   <div class="hello">
-		<slot></slot>
+		<h1>ВЛОЖЕНОСТЬ БОЛЬШЕ {{state.color}}</h1>
   </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
+  inject: ['state'],
   props: {
     msg: String
   }

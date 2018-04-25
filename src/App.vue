@@ -1,46 +1,27 @@
 <template>
   <div id="app" >
-    <HelloWorld msg="Welcome to Your Vue.js App">
-			{{ state.color }}
-			<SlotComponent @updateState="changeCustomProperty($event)">
+		<provider>
+			<SlotComponent>
+				<hello-world></hello-world>
 			</SlotComponent>
-		</HelloWorld>
+		</provider>
+    
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
-import Component from 'vue-class-component';
 import HelloWorld from './components/HelloWorld.vue';
 import SlotComponent from './components/Slot.vue';
+import Provider from './Provider.vue';
 
-const inititalState = {
-  color: 'black'
-};
-
-@Component({
+export default {
   name: 'app',
   components: {
+    Provider,
     HelloWorld,
     SlotComponent
-  },
-  provide() {
-    return {
-      state: this.state
-    };
-  },
-  methods: {
-    changeCustomProperty(payload) {
-      Vue.set(this.state, payload.key, payload.value);
-    }
   }
-})
-export default class App extends Vue {
-  constructor(state = inititalState) {
-    super();
-    this.state = Vue.set(this, 'state', state);
-  }
-}
+};
 </script>
 
 <style>
