@@ -9,6 +9,7 @@
 <script>
 export default {
   name: 'SlotComponent',
+  inject: ['color'],
   data() {
     return {
       color: this.color

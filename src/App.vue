@@ -20,6 +20,9 @@ export default {
     HelloWorld,
     SlotComponent
   },
+  provide: {
+    color: 'red'
+  },
   methods: {
     changeCustomProperty(payload) {
       this[payload.prop] = payload.value;

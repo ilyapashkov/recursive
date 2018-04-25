@@ -9,19 +9,6 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  },
-  mounted() {
-    this.recursive(this.$children);
-  },
-  methods: {
-    recursive(childrens) {
-      if (childrens.length) {
-        childrens.forEach(child => {
-          child['color'] = 'red';
-          this.recursive(child.$children);
-        });
-      }
-    }
   }
 };
 </script>
