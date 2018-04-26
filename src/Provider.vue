@@ -6,34 +6,31 @@
 
 <script>
 import Vue from 'vue';
-import Component from 'vue-class-component';
 import EventBus from './eventBus';
 
 const inititalState = {
   color: 'black'
 };
 
-@Component({
+export default {
   name: 'Provider',
+  data() {
+    return {
+      state: inititalState
+    };
+  },
   provide() {
     return {
       state: this.state
     };
+  },
+  mounted() {
+    EventBus.$on('updateState', event => this.changeCustomProperty(event));
   },
   methods: {
     changeCustomProperty(payload) {
       Vue.set(this.state, payload.key, payload.value);
     }
   }
-})
-export default class App extends Vue {
-  constructor(state = inititalState) {
-    super();
-    this.state = Vue.set(this, 'state', state);
-  }
-
-  mounted() {
-    EventBus.$on('updateState', event => this.changeCustomProperty(event));
-  }
-}
+};
 </script>
