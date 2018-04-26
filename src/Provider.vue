@@ -5,11 +5,10 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import EventBus from './eventBus';
 
 const inititalState = {
-  color: 'black'
+  color: true
 };
 
 export default {
@@ -25,11 +24,11 @@ export default {
     };
   },
   mounted() {
-    EventBus.$on('updateState', event => this.changeCustomProperty(event));
+    EventBus.$on('updateState', event => this.updateState(event));
   },
   methods: {
-    changeCustomProperty(payload) {
-      Vue.set(this.state, payload.key, payload.value);
+    updateState(payload) {
+      this.state[payload.key] = payload.value;
     }
   }
 };

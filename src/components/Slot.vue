@@ -22,7 +22,10 @@ export default {
   },
   methods: {
     changeColor() {
-      EventBus.$emit('updateState', {key: 'color', value: 'pink'});
+      EventBus.$emit('updateState', {
+        key: 'color',
+        value: !this.getState.color
+      });
     }
   }
 };
